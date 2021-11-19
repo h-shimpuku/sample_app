@@ -32,5 +32,9 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", user_path(@user)
     assert_select "a[href=?]", edit_user_path(@user)
     assert_select "a[href=?]", logout_path
+
+    # 統計情報
+    assert_select 'a > strong', text: "#{@user.following.count}"
+    assert_select 'a > strong', text: "#{@user.followers.count}"
   end
 end
