@@ -16,4 +16,9 @@ Rails.application.routes.draw do
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
+  namespace :api do
+    scope :v1 do
+      resources :users,           only: [:index]
+    end
+  end
 end

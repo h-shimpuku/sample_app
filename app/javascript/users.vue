@@ -45,18 +45,17 @@
 
 <script>
 
+import axios from 'axios';
+
 export default {
   props: {
-    users: {
-      default: "[]"
-    },
     iconSize: {
       default: '50'
     }
   },
   data: function () {
     return {
-      userList: JSON.parse(this.users),
+      userList: [],
       paginate: ['paginate-user'],
       crypto: require('crypto')
     }
@@ -64,6 +63,12 @@ export default {
   computed: {
   },
   created: function ()  {
+    axios.get('/api/v1/users')
+      .then(response => {
+        if (response.status === 200) {
+          this.userList = response.data;
+        }
+      })
   },
   mounted: function ()  {
   },
