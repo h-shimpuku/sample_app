@@ -1,10 +1,8 @@
 <% provide(:title, 'All users') %>
-<h1>All users</h1>
 
-<%= will_paginate %>
+<div id="users">
+  <Users users="<%= @users.to_json %>" icon-size="50"/>
+</div>
 
-<ul class="users">
-  <%= render @users %>
-</ul>
-
-<%= will_paginate %>
+<%= javascript_pack_tag 'users_vue' %>
+<%= stylesheet_pack_tag 'users_vue' %>
