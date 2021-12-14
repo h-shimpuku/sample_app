@@ -40,14 +40,21 @@
         }"
       ></paginate-links>
     </div>
+    <Button/>
+    {{ clickCntText }}
   </div>
 </template>
 
 <script>
 
 import axios from 'axios';
+import { mapGetters } from 'vuex';
+import Button from './components/Button.vue';
 
 export default {
+  components: {
+    Button
+  },
   props: {
     iconSize: {
       default: '50'
@@ -61,8 +68,11 @@ export default {
     }
   },
   computed: {
+    ...mapGetters([
+      'clickCntText'
+    ])
   },
-  created: function ()  {
+  created: function () {
     axios.get('/api/v1/users')
       .then(response => {
         if (response.status === 200) {
@@ -70,7 +80,7 @@ export default {
         }
       })
   },
-  mounted: function ()  {
+  mounted: function () {
   },
   methods: {
     generateGravaterUrl(user) {
